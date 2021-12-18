@@ -1,7 +1,7 @@
 package gridGames;
 
-import joueurs.Gamer;
-import joueurs.Symbol;
+import gamers.Gamer;
+import gamers.Symbol;
 
 public abstract class GridGameAbstract implements IGridGame {
 	private int nbLig;

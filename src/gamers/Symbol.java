@@ -1,4 +1,4 @@
-package joueurs;
+package gamers;
 
 public enum Symbol {
 	Vide(' '), J1('X'), J2('O');

@@ -1,4 +1,4 @@
-package joueurs;
+package gamers;
 
 public class Gamer {
 	private boolean winner;
