@@ -2,8 +2,8 @@ package gridGames;
 
 public class JoinFive extends GridGameAbstract{
 
-	public JoinFive(int nbCol, int nbLig) {
-		super(nbCol, nbLig);
+	public JoinFive() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
