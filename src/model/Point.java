@@ -1,4 +1,4 @@
-package gridGames;
+package model;
 
 public class Point {
 	private int x;
@@ -54,7 +54,7 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return "[x=" + x + ", y=" + y + ", isValidate=" + isValidate + "]";
+		return "[x=" + x + ", y=" + y + ", " + isValidate + "]";
 	}
 
 

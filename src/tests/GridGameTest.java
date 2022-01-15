@@ -1,28 +1,28 @@
-package gridTest;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import gridGames.IGridGame;
-import gridGames.JoinFive;
+import model.IGridGame;
+import model.GridGame5D;
 
 class GridGameTest {
 
 	@Test
 	void IGridGameTestIsAlign() {
-		IGridGame game=new JoinFive();
+		IGridGame game=new GridGame5D();
 		assertFalse(game.isAligned(-1, 0, 5));
-		game.placePawn(-1, 0);
+		game.placePoint(-1, 0);
 		assertTrue(game.isAligned(-2, 0, 5));
 	}
 	
 	@Test
 	void JoinFiveTestNumberAlign() {
-		JoinFive game=new JoinFive();
+		GridGame5D game=new GridGame5D();
 		assertEquals(4, game.numberAlignedPoints(-1, 0, 1, 0));
 		for(int i=0;i<5;++i) {
-			game.placePawn(4+i,0);
+			game.placePoint(4+i,0);
 		}
 		assertEquals(9,game.numberAlignedPoints(-1, 0, 1, 0));
 	}

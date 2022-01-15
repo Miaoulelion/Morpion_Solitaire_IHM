@@ -1,10 +1,9 @@
-package gridGames;
+package model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Iterator;
 
-import gamers.Gamer;
-import gamers.Symbol;
+
 
 public abstract class GridGameAbstract implements IGridGame {
 	private ArrayList<Point>GridPoints;
@@ -30,7 +29,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	}
 	
 	
-	public void placePawn(int x, int y) {
+	public void placePoint(int x, int y) {
 		if(!this.GridPoints.contains(new Point(x,y))) {
 			this.GridPoints.add(new Point(x,y));
 		}
@@ -90,6 +89,9 @@ public abstract class GridGameAbstract implements IGridGame {
 	 */
 
 	public boolean isAligned(int x, int y, int alignmentNumberChoice) {
+		if(alignmentNumberChoice<=0) {
+			throw new IllegalArgumentException("The number alignment required need to be >0.");
+		}
 		for(int i=0;i<this.DirX.length;++i) {
 			int nbSymb=0;
 			nbSymb=numberAlignedPoints(x, y, this.DirX[i], this.DirY[i]);
@@ -100,9 +102,10 @@ public abstract class GridGameAbstract implements IGridGame {
 		return false;
 	}
 	
+	public Iterator<Point> getGridPoints(){
+		return this.GridPoints.iterator();
+	}
 	
-	
-
 	
 	
 }
