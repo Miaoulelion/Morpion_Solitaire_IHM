@@ -1,7 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
 
 
 
@@ -102,8 +102,10 @@ public abstract class GridGameAbstract implements IGridGame {
 		return false;
 	}
 	
-	public Iterator<Point> getGridPoints(){
-		return this.GridPoints.iterator();
+	public ArrayList<Point> getGridPoints(){
+		ArrayList<Point> GridPointsCopy= new ArrayList<>();
+		Collections.copy(GridPointsCopy, this.GridPoints);
+		return GridPointsCopy;
 	}
 	
 	

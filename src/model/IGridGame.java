@@ -1,9 +1,9 @@
 package model;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 
 public interface IGridGame {
 	public void placePoint(int x, int y);
 	public boolean isAligned(int numLig, int numCol, int nbr);
-	public Iterator<Point> getGridPoints();
+	public ArrayList<Point> getGridPoints();
 }
