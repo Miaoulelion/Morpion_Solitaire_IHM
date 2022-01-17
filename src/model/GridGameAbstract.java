@@ -32,6 +32,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	public void placePoint(int x, int y) {
 		if(!this.GridPoints.contains(new Point(x,y))) {
 			this.GridPoints.add(new Point(x,y));
+			System.out.println("Alignment : "+ this.isAligned(x, y, 5));
 		}
 	}
 	

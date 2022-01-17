@@ -14,13 +14,14 @@ public class ApplyGridGame {
 		// TODO Auto-generated method stub
 		IGridGame gameModel=new GridGame5D();
 		JFrame frame= new JFrame("Join Five Game");
-		frame.setSize(800, 600);
-		JPanel game1=new GridView(gameModel);
-		JPanel game = new GameView(gameModel);
-		frame.setContentPane(game1);
+		frame.setSize(900, 600);
+		//JPanel game1=new GridView(gameModel);
+		JPanel game = new GameView();
+		frame.setContentPane(game);
 		frame.setVisible(true);
 		//frame.isVisible();
-
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
 	}
 	
 }
