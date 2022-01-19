@@ -78,7 +78,7 @@ public abstract class GridGameAbstract implements IGridGame {
 		}
 		int nbPoints=0;
 		for(int j=1;this.GridPoints.contains(new Point(x + DirX*j,y + DirY*j));++j){
-			++nbPoints;
+			++nbPoints;//Il faut ajouter la condition sur le fait qu'un point soit déjà validé!
 		}
 		return nbPoints;
 	}
@@ -93,6 +93,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	 * @return the maximal number of aligned Point from a Point (coordinate x, y) + the point itself
 	 */
 	
+	//Plutôt que number, renvoyer les points alignés ?
 	public int numberAlignedPoints(int x, int y, int DirX, int DirY) {
 		int nbSymbole=numberAlignedPointsByDirection(x, y, DirX, DirY);
 		nbSymbole+=numberAlignedPointsByDirection(x, y, -DirX, -DirY);
@@ -104,7 +105,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	 * Return true if there is an alignment of "alignmentNumberChoix" length Point.
 	 * @return boolean
 	 */
-
+	//Ici on renverrait les alignements valides en fonction du nombre
 	public boolean isAligned(int x, int y, int alignmentNumberChoice) {
 		if(alignmentNumberChoice<=0) {
 			throw new IllegalArgumentException("The number alignment required need to be >0.");
@@ -118,6 +119,8 @@ public abstract class GridGameAbstract implements IGridGame {
 		}
 		return false;
 	}
+	
+	//Puis dans la version 5T on vérifierait en plus l'autre condition
 	
 	public ArrayList<Point> getGridPoints(){
 		ArrayList<Point> GridPointsCopy= new ArrayList<Point>(this.GridPoints);

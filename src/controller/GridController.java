@@ -9,7 +9,6 @@ public class GridController extends MouseAdapter {
 	private final int GRIDLINESWIDTH=40;
 	private GridView gridView;
 	private IGridGame gameModel;
-	private int x1,y1,x2,y2; 
 	
 	public GridController(GridView gridView, IGridGame gameModel) {
 		this.gridView=gridView;
@@ -38,17 +37,13 @@ public class GridController extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		this.gridView.setMousePressed(true);
-		this.gridView.setX1(e.getX());
-		this.gridView.setY1(e.getY());
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		this.gridView.setMousePressed(false);
-		this.gridView.repaint();
+
 	}
 
 	@Override
@@ -65,11 +60,7 @@ public class GridController extends MouseAdapter {
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		this.gridView.setX2(e.getX());
-		this.gridView.setY2(e.getY());
-
-		this.gridView.repaint();
-		
+		// TODO Auto-generated method stub
 	}
 	
 	public boolean isValidLine(int x1, int y1, int x2, int y2) {

@@ -17,9 +17,6 @@ public class GridView extends JPanel{
 	private final int NUMBEROFGRIDLINES=50;
 	private final int POINTWIDTH=10;
 	private final int GRIDLINESWIDTH=40;
-	private int x1,y1,x2,y2;
-	private boolean isMousePressed;
-	private boolean isCorrectLine;
 	private IGridGame gameModel;
 	
 
@@ -32,8 +29,6 @@ public class GridView extends JPanel{
 	
 	public GridView(IGridGame g) {
 		this.gameModel=g;
-		this.isCorrectLine=false;
-		this.isMousePressed=false;
 	}
 	
 	
@@ -49,18 +44,10 @@ public class GridView extends JPanel{
 			g.fillOval(p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2), 
 					POINTWIDTH, POINTWIDTH);
 		}
-		
-		if(this.isMousePressed&&!this.isCorrectLine) {
-			g.drawLine(this.x1, this.y1, this.x2, this.y2);
-		}
-		else if(this.isMousePressed) {
-			g.setColor(Color.green);
-			g.drawLine(this.x1, this.y1, this.x2, this.y2);
-		}
-		
-		
 	}
 
+	
+	
 	public int getWIDTH() {
 		return GRIDLINESWIDTH;
 	}
@@ -68,31 +55,7 @@ public class GridView extends JPanel{
 	public int getNUMBEROFLINES() {
 		return NUMBEROFGRIDLINES;
 	}
-	
-	public void setX1(int x) {
-		this.x1=x;
-	}
-	
-	public void setY1(int y) {
-		this.y1=y;
-	}
-	
-	public void setX2(int x) {
-		this.x2=x;
-	}
-	
-	public void setY2(int y) {
-		this.y2=y;
-	}
 
-	public void setMousePressed(boolean isMousePressed) {
-		this.isMousePressed = isMousePressed;
-	}
-
-
-	public void setCorrectLine(boolean isCorrectLine) {
-		this.isCorrectLine = isCorrectLine;
-	}
 	
 	
 
