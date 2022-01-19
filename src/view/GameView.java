@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Objects;
@@ -15,7 +14,7 @@ import model.IGridGame;
 
 public class GameView extends JPanel{
 	private IGridGame gridGame= new GridGame5D();
-	private GridView gridView=new GridView();
+	private GridView gridView=new GridView(this.gridGame);
 	MouseListener gameController=new GridController(this.gridView, this.gridGame);
 
 	/**
@@ -33,13 +32,6 @@ public class GameView extends JPanel{
 		this.add(this.gridView, BorderLayout.SOUTH);
 	}
 	
-
-
-/*		setLayout(new BorderLayout(0,0));
-		board.setPreferredSize(new Dimension(680,600));		
-		add(buttons, BorderLayout.NORTH);	
-		board.addMouseListener(m);		
-		add(board, BorderLayout.SOUTH);	*/
 
 	public IGridGame getGridGame() {
 		return gridGame;

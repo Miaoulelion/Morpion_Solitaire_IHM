@@ -2,39 +2,37 @@ package controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.JPanel;
-
 import model.IGridGame;
-import view.GameView;
 import view.GridView;
 
 public class GridController extends MouseAdapter {
-	private final int GRIDLINESWIDTH=50;
+	private final int GRIDLINESWIDTH=40;
 	private GridView gridView;
 	private IGridGame gameModel;
+	private int x1,y1,x2,y2; 
 	
 	public GridController(GridView gridView, IGridGame gameModel) {
 		this.gridView=gridView;
 		this.gameModel=gameModel;
 	}
+	
+
+	/**
+	 * @param MouseEvent e (here click)
+	 * When the mouse click on the grid, we take its position and place a point on the grid.
+	 * The point is placed thanks to the placePont() method of the model class.
+	 * The point is placed only if the click position is close to an line/column intersection of the grid (look at the if condition).
+	 */
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-		System.out.println("x="+e.getX());
-		int x = Math.round((e.getX()+10)/ 10) * 10;
-		int y = Math.round((e.getY()+10)/ 10) * 10;
-		System.out.println("new x="+x);
-		if(x/GRIDLINESWIDTH<=100 && y/GRIDLINESWIDTH<=100) {
-			System.out.println("Adding"+y/50+"; "+x/50);
-			gameModel.placePoint(x/GRIDLINESWIDTH, y/GRIDLINESWIDTH);
-			//System.out.println(gameModel);
+		double x=(double)e.getX()/(double)GRIDLINESWIDTH;
+		double y=(double)e.getY()/(double)GRIDLINESWIDTH;
+		if(!((Math.abs(x-Math.round(x))>0.25&&Math.abs(x-Math.round(x))<0.75)
+				||(Math.abs(y-Math.round(y))>0.25&&Math.abs(y-Math.round(y))<0.75))){
+			gameModel.placePoint((int)Math.round(x), (int)Math.round(y));
+			gridView.repaint();
 		}
-		
-		gridView.repaint();
 	}
 
 	@Override
@@ -43,6 +41,7 @@ public class GridController extends MouseAdapter {
 		this.gridView.setMousePressed(true);
 		this.gridView.setX1(e.getX());
 		this.gridView.setY1(e.getY());
+
 	}
 
 	@Override
@@ -68,8 +67,17 @@ public class GridController extends MouseAdapter {
 	public void mouseDragged(MouseEvent e) {
 		this.gridView.setX2(e.getX());
 		this.gridView.setY2(e.getY());
+
 		this.gridView.repaint();
 		
+	}
+	
+	public boolean isValidLine(int x1, int y1, int x2, int y2) {
+		System.out.println(x1+" "+y1+ " "+x2+ " "+ y2);
+		if(x1-x2==0||y1-y2==0||((x1-x2)==(y1-y2))){
+			return true;
+		}
+		return false;
 	}
 
 }
