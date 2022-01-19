@@ -1,9 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-
 
 public abstract class GridGameAbstract implements IGridGame {
 	private ArrayList<Point>GridPoints;
@@ -13,13 +10,32 @@ public abstract class GridGameAbstract implements IGridGame {
 	
 	public GridGameAbstract() {
 		this.GridPoints=new ArrayList<Point>();
-		gridInitialization(4);
+		gridInitialization(10,3,4);
 	}
 	
 	
-	public void gridInitialization(int widthCross) {
+	
+	/**
+	 * This method place the points to form a cross. 
+	 * @param x : coordinate (x value) of the beginning of the cross.
+	 * @param y : coordinate (y value) of the beginning of the cross.
+	 * @param widthCross : the width of the cross.
+	 */
+	
+	public void gridInitialization(int x, int y, int widthCross) {
 		for(int i=0;i<widthCross;++i) {
-			this.GridPoints.add(new Point(i,0));
+			this.GridPoints.add(new Point(x+i,y));
+			this.GridPoints.add(new Point(x+i-widthCross+1,y+widthCross-1));
+			this.GridPoints.add(new Point(x+i+widthCross-1,y+widthCross-1));
+			this.GridPoints.add(new Point(x+i-widthCross+1,y+2*widthCross-2));
+			this.GridPoints.add(new Point(x+i+widthCross-1,y+2*widthCross-2));
+			this.GridPoints.add(new Point(x+i,y+3*widthCross-3));
+			this.GridPoints.add(new Point(x,y+i));
+			this.GridPoints.add(new Point(x+widthCross-1,y+i));
+			this.GridPoints.add(new Point(x-widthCross+1,y+i+widthCross-1));
+			this.GridPoints.add(new Point(x+2*widthCross-2,y+i+widthCross-1));
+			this.GridPoints.add(new Point(x,y+i+2*widthCross-2));
+			this.GridPoints.add(new Point(x+widthCross-1,y+i+2*widthCross-2));
 		}
 	}
 	
@@ -30,7 +46,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	
 	
 	public void placePoint(int x, int y) {
-		if(!this.GridPoints.contains(new Point(x,y))) {
+		if(!this.GridPoints.contains(new Point(x,y))&&this.isAligned(x, y, 5)) {
 			this.GridPoints.add(new Point(x,y));
 			System.out.println("Alignment : "+ this.isAligned(x, y, 5));
 		}
@@ -74,13 +90,13 @@ public abstract class GridGameAbstract implements IGridGame {
 	 * @param y
 	 * @param DirX
 	 * @param DirY
-	 * @return the maximal number of aligned Point from a Point (coordinate x, y)
+	 * @return the maximal number of aligned Point from a Point (coordinate x, y) + the point itself
 	 */
 	
 	public int numberAlignedPoints(int x, int y, int DirX, int DirY) {
 		int nbSymbole=numberAlignedPointsByDirection(x, y, DirX, DirY);
 		nbSymbole+=numberAlignedPointsByDirection(x, y, -DirX, -DirY);
-		return nbSymbole;
+		return nbSymbole+1; 
 	}
 	
 	
@@ -104,8 +120,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	}
 	
 	public ArrayList<Point> getGridPoints(){
-		ArrayList<Point> GridPointsCopy= new ArrayList<>();
-		Collections.copy(GridPointsCopy, this.GridPoints);
+		ArrayList<Point> GridPointsCopy= new ArrayList<Point>(this.GridPoints);
 		return GridPointsCopy;
 	}
 	
