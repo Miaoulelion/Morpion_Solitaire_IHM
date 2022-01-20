@@ -2,9 +2,12 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 import model.IGridGame;
+import model.Line;
 
 /**
  * This class create the grid game (morpion) view. The game is composed by a grid
@@ -43,6 +46,15 @@ public class GridView extends JPanel{
 		for(model.Point p:this.gameModel.getGridPoints()) {
 			g.fillOval(p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2), 
 					POINTWIDTH, POINTWIDTH);
+		}
+		
+		
+		for(Line line : this.gameModel.getListOfAlignment()) {
+			LinesView lineView = new LinesView(line.getLinePoint().get(0).getX()*GRIDLINESWIDTH, 
+					line.getLinePoint().get(0).getY()*GRIDLINESWIDTH, 
+					line.getLinePoint().get(line.getLinePoint().size()-1).getX()*GRIDLINESWIDTH, 
+					line.getLinePoint().get(line.getLinePoint().size()-1).getY()*GRIDLINESWIDTH);
+			lineView.draw(g);
 		}
 	}
 

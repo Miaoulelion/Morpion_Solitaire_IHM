@@ -1,7 +1,8 @@
-package model;
+package utils;
 
 public enum Direction {
-	VERTICAL(0,-1),UPLEFTDIAGONAL(1,-1),HORIZONTAL(1,0),UPRIGHTDIAGONAL(1,1);
+    VERTICAL(0,-1),HORIZONTAL(1,0),DIAGONALRIGHT(1,1),DIAGONALLEFT(1,-1);
+
 	private final int dx, dy;
 
 	Direction(int dx, int dy) {
@@ -16,6 +17,5 @@ public enum Direction {
 	public int getDy() {
 		return dy;
 	}
-
 
 }

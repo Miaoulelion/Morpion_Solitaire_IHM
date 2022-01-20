@@ -1,18 +1,20 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import utils.Direction;
 
 public abstract class GridGameAbstract implements IGridGame {
 	private ArrayList<Point>GridPoints;
-	final private int [] DirX = {0,1,1,1};
-	final private int [] DirY = {-1,-1,0,1};
+	private ArrayList<Line> listOfAlignment;
+
 	
 	
 	public GridGameAbstract() {
 		this.GridPoints=new ArrayList<Point>();
+		this.listOfAlignment=new ArrayList<Line>();
 		gridInitialization(10,3,4);
 	}
-	
 	
 	
 	/**
@@ -48,83 +50,73 @@ public abstract class GridGameAbstract implements IGridGame {
 	public void placePoint(int x, int y) {
 		if(!this.GridPoints.contains(new Point(x,y))&&this.isAligned(x, y, 5)) {
 			this.GridPoints.add(new Point(x,y));
-			System.out.println("Alignment : "+ this.isAligned(x, y, 5));
+			System.out.println("Add point x="+x + " y="+y);
 		}
 	}
 	
+
 	
-	public boolean isOccupied(int x, int y) {
-		if(this.GridPoints.contains(new Point(x,y))) {
-			return true;
+
+	public ArrayList<Point> AlignedPointsByDirection(int x, int y, Direction dir, int nbPointAlreadyAligned) {
+		Objects.requireNonNull(dir);
+		ArrayList<Point> alignPoint = new ArrayList<Point>();
+		alignPoint.add(new Point(x,y));
+		int cptPointAlreadyAligned=0;
+		for(int j=1;this.GridPoints.contains(new Point(x + dir.getDx()*j,y + dir.getDy()*j));++j){
+			Point p=this.GridPoints.get(this.GridPoints.indexOf(new Point(x + dir.getDx()*j,y + dir.getDy()*j)));
+			if(p.getDirAlignment().isPresent()&&p.getDirAlignment().get()==dir) {
+				++cptPointAlreadyAligned;
+				if(cptPointAlreadyAligned>=nbPointAlreadyAligned) {
+					break;
+				}
+			}
+			alignPoint.add(p);
 		}
-		return false;
-	}
-	
-	/** 
-	 * We see if there is an adjacent point. 
-	 * In this case, we go in its direction, we sum the points aligned on this direction.
-	 * And we return the maximal number of aligned points (after all the directions are checked).
-	 * Here we visit the direction in one way only (to the top, to the left, to the right, ...).
-	 * @param x
-	 * @param y
-	 * @param DirX
-	 * @param DirY
-	 * @return the maximal number of aligned Point from a Point (in one way of a direction)
-	 */
-	
-	public int numberAlignedPointsByDirection(int x, int y, int DirX, int DirY) {
-		if(!(DirX==1 || DirX==-1 || DirX==0) && !(DirY==1 || DirY==-1 || DirY==0)) {
-			throw new IllegalArgumentException("La direction donnée en paramètre est invalide : " + DirX + " " + DirY);
+		for(int j=1;this.GridPoints.contains(new Point(x - dir.getDx()*j,y - dir.getDy()*j));++j){
+			Point p=this.GridPoints.get(this.GridPoints.indexOf(new Point(x - dir.getDx()*j,y - dir.getDy()*j)));
+			if(p.getDirAlignment().isPresent()&&p.getDirAlignment().get()==dir) {
+				++cptPointAlreadyAligned;
+				if(cptPointAlreadyAligned>=nbPointAlreadyAligned) {
+					break;
+				}
+			}
+			alignPoint.add(p);
 		}
-		int nbPoints=0;
-		for(int j=1;this.GridPoints.contains(new Point(x + DirX*j,y + DirY*j));++j){
-			++nbPoints;//Il faut ajouter la condition sur le fait qu'un point soit déjà validé!
-		}
-		return nbPoints;
-	}
-	
-	/**
-	 * We use the numberAlignedPointsByDirection() method to check all the ways directions
-	 * and return the maximal number of aligned points (to the right AND to the left, to the top AND to the bottom).
-	 * @param x
-	 * @param y
-	 * @param DirX
-	 * @param DirY
-	 * @return the maximal number of aligned Point from a Point (coordinate x, y) + the point itself
-	 */
-	
-	//Plutôt que number, renvoyer les points alignés ?
-	public int numberAlignedPoints(int x, int y, int DirX, int DirY) {
-		int nbSymbole=numberAlignedPointsByDirection(x, y, DirX, DirY);
-		nbSymbole+=numberAlignedPointsByDirection(x, y, -DirX, -DirY);
-		return nbSymbole+1; 
+		return alignPoint;
 	}
 	
 	
-	/**
-	 * Return true if there is an alignment of "alignmentNumberChoix" length Point.
-	 * @return boolean
-	 */
-	//Ici on renverrait les alignements valides en fonction du nombre
-	public boolean isAligned(int x, int y, int alignmentNumberChoice) {
-		if(alignmentNumberChoice<=0) {
-			throw new IllegalArgumentException("The number alignment required need to be >0.");
-		}
-		for(int i=0;i<this.DirX.length;++i) {
-			int nbSymb=0;
-			nbSymb=numberAlignedPoints(x, y, this.DirX[i], this.DirY[i]);
-			if(nbSymb>=alignmentNumberChoice) {
+	
+	public boolean isAligned(int x, int y, int alignmentNumber, int nbPointAlreadyAligned) {
+		for(Direction d : Direction.values()) {
+			if(this.AlignedPointsByDirection(x, y, d,nbPointAlreadyAligned).size()>=alignmentNumber) {
+				ArrayList<Point> alignment=this.AlignedPointsByDirection(x, y, d,nbPointAlreadyAligned);
+				this.listOfAlignment.add(new Line(alignment));//on ajoute l'alignement pour le tracer plus tard
+				for(Point p: alignment) {
+					p.setDirAlignment(d);//SALE on écrit que le point est aligné
+				}
+				System.out.println("Alignment ("+x+";"+y+") : true");
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	public boolean isAligned(int x, int y, int alignmentNumber) {
+		return isAligned(x, y, alignmentNumber,0);
+	}
+	
+	
 	//Puis dans la version 5T on vérifierait en plus l'autre condition
 	
 	public ArrayList<Point> getGridPoints(){
 		ArrayList<Point> GridPointsCopy= new ArrayList<Point>(this.GridPoints);
 		return GridPointsCopy;
+	}
+
+
+	public ArrayList<Line> getListOfAlignment() {
+		return new ArrayList<Line>(this.listOfAlignment);
 	}
 	
 	

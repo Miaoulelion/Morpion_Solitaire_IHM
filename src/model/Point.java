@@ -1,14 +1,18 @@
 package model;
 
+import java.util.Objects;
+import java.util.Optional;
+
+import utils.Direction;
+
 public class Point {
 	private int x;
 	private int y;
-	private boolean isValidate;
+	private Direction dirAlignment;
 	
 	public Point(int x, int y) {
 		this.x=x;
 		this.y=y;
-		this.isValidate=false;
 	}
 
 	public int getX() {
@@ -17,14 +21,6 @@ public class Point {
 
 	public int getY() {
 		return y;
-	}
-
-	public boolean isValidate() {
-		return isValidate;
-	}
-	
-	public void setValidate(boolean b) {
-		this.isValidate=b;
 	}
 
 	@Override
@@ -54,7 +50,16 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return "[x=" + x + ", y=" + y + ", " + isValidate + "]";
+		return "[x=" + x + ", y=" + y +"]";
+	}
+
+	public Optional<Direction> getDirAlignment() {
+		return Optional.ofNullable(this.dirAlignment);
+	}
+
+	public void setDirAlignment(Direction dirAlignment) {
+		Objects.requireNonNull(dirAlignment);
+		this.dirAlignment = dirAlignment;
 	}
 
 
