@@ -9,11 +9,12 @@ import java.util.Objects;
 import javax.swing.JPanel;
 
 import controller.GridController;
+import model.GridGame5D;
 import model.GridGame5T;
 import model.IGridGame;
 
 public class GameView extends JPanel{
-	private IGridGame gridGame= new GridGame5T();
+	private IGridGame gridGame= new GridGame5D();
 	private GridView gridView=new GridView(this.gridGame);
 	private JPanel MenuView=new MenuView(gridView);
 	MouseListener gameController=new GridController(this.gridView, this.gridGame);
