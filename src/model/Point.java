@@ -1,6 +1,7 @@
 package model;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import utils.Direction;
@@ -22,6 +23,7 @@ public class Point {
 	 * @param dir
 	 */
 	public void addDirection(Direction dir) {
+		Objects.requireNonNull(dir);
 		this.dirAlignments.add(dir);
 	}
 

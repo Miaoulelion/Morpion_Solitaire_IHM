@@ -10,4 +10,5 @@ public interface IGridGame {
 	public ArrayList<Line> getListOfAlignment();
 	public Set<Point> getPossiblePoint();
 	public void randomSolve();
+	public void restartGame();
 }

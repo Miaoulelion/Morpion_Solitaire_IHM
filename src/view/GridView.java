@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Objects;
+
 import javax.swing.JPanel;
 
 import model.GridGameAbstract;
@@ -53,7 +55,7 @@ public class GridView extends JPanel{
 		for(model.Point p:((GridGameAbstract)this.gameModel).getPointPlayed()) {
 			g.drawString(""+cpt, p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2));
 			++cpt;
-			System.out.println(cpt);
+			
 		}
 		
 		
@@ -68,31 +70,8 @@ public class GridView extends JPanel{
 			hint=false;
 		}
 		
-
-		
-		
-		//g.drawString("5", 2*NUMBEROFGRIDLINES, 2*GRIDLINESWIDTH);
-		/*
-		for(Line line : this.gameModel.getListOfAlignment()) {
-			LinesView lineView = new LinesView(line.getLinePoint().get(0).getX()*GRIDLINESWIDTH, 
-					line.getLinePoint().get(0).getY()*GRIDLINESWIDTH, 
-					line.getLinePoint().get(line.getLinePoint().size()-1).getX()*GRIDLINESWIDTH, 
-					line.getLinePoint().get(line.getLinePoint().size()-1).getY()*GRIDLINESWIDTH);
-			lineView.draw(g);
-		}*/
 	}
 
-	
-	public void activHint() {
-		this.hint=true;
-		repaint();
-	}
-	
-	public void startRandomSolve() {
-		this.gameModel.randomSolve();
-		repaint();	
-	}
-	
 	
 	public int getWIDTH() {
 		return GRIDLINESWIDTH;
@@ -102,7 +81,18 @@ public class GridView extends JPanel{
 		return NUMBEROFGRIDLINES;
 	}
 
-	
+
+	public void setHint(boolean hint) {
+		this.hint = hint;
+	}
+
+
+	public void setGameModel(IGridGame gameModel) {
+		Objects.requireNonNull(gameModel);
+		this.gameModel = gameModel;
+	}
+
+
 	
 
 }

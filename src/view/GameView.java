@@ -2,22 +2,21 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Objects;
 
 import javax.swing.JPanel;
 
-import controller.GridController;
+import controller.Controller;
 import model.GridGame5D;
 import model.GridGame5T;
 import model.IGridGame;
 
 public class GameView extends JPanel{
-	private IGridGame gridGame= new GridGame5D();
-	private GridView gridView=new GridView(this.gridGame);
-	private JPanel MenuView=new MenuView(gridView);
-	MouseListener gameController=new GridController(this.gridView, this.gridGame);
+	private IGridGame gameModel= new GridGame5D();
+	private GridView gridView=new GridView(this.gameModel);
+	private MenuView MenuView=new MenuView();
+	Controller gameController=new Controller(this, this.gameModel);
 
 	/**
 	 * 
@@ -34,20 +33,48 @@ public class GameView extends JPanel{
 		this.gridView.addMouseMotionListener((MouseMotionListener) this.gameController);
 		this.add(this.gridView, BorderLayout.SOUTH);
 		this.add(MenuView, BorderLayout.NORTH);
+		
 	}
 	
 
 	public IGridGame getGridGame() {
-		return gridGame;
+		return gameModel;
 	}
-
+	
 
 
 	public void setGridGame(IGridGame gameModel) {
 		Objects.requireNonNull(gameModel);
-		this.gridGame = gameModel;
+		this.gameModel = gameModel;
+		
 	}
 
+	public void changeGame() {
+		if(this.gameModel instanceof GridGame5D) {
+			//this.gamev
+			this.gameModel = new GridGame5T();
+			this.gridView.setGameModel(gameModel);
+			this.gameController.setGameModel(gameModel);
+			this.gridView.repaint();
+		}else {
+			this.gameModel= new GridGame5D();
+			this.gridView.setGameModel(gameModel);
+			this.gameController.setGameModel(gameModel);
+			this.gridView.repaint();
+
+		}
+	
+	}
+
+
+	public GridView getGridView() {
+		return gridView;
+	}
+
+
+	public MenuView getMenuView() {
+		return MenuView;
+	}
 
 	
 	
