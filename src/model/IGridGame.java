@@ -1,11 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public interface IGridGame {
 	public void placePoint(int x, int y);
-	public boolean isAligned(int numLig, int numCol, int nbr);
 	public ArrayList<Point> getGridPoints();
 	public ArrayList<Line> getListOfAlignment();
+	public Set<Point> getPossiblePoint();
+	public void randomSolve();
 }

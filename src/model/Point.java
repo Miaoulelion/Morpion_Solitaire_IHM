@@ -1,18 +1,28 @@
 package model;
 
-import java.util.Objects;
-import java.util.Optional;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import utils.Direction;
 
 public class Point {
 	private int x;
 	private int y;
-	private Direction dirAlignment;
+	private Set<Direction> dirAlignments;
 	
 	public Point(int x, int y) {
 		this.x=x;
 		this.y=y;
+		this.dirAlignments=new LinkedHashSet<Direction>();
+	}
+	
+	/**
+	 * A point can be aligned in many direction. We need to save all that directions,
+	 * to verify if a new point can be added next to this point.
+	 * @param dir
+	 */
+	public void addDirection(Direction dir) {
+		this.dirAlignments.add(dir);
 	}
 
 	public int getX() {
@@ -31,6 +41,7 @@ public class Point {
 		result = prime * result + y;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -53,13 +64,9 @@ public class Point {
 		return "[x=" + x + ", y=" + y +"]";
 	}
 
-	public Optional<Direction> getDirAlignment() {
-		return Optional.ofNullable(this.dirAlignment);
-	}
 
-	public void setDirAlignment(Direction dirAlignment) {
-		Objects.requireNonNull(dirAlignment);
-		this.dirAlignment = dirAlignment;
+	public Set<Direction> getDirAlignments() {
+		return dirAlignments;
 	}
 
 

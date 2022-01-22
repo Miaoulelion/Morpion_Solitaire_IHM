@@ -5,6 +5,7 @@ import java.util.Comparator;
 import model.Point;
 
 public class ComparePointByX implements Comparator<Point>{
+	
 
 	@Override
 	public int compare(Point p1, Point p2) {

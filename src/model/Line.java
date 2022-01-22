@@ -31,7 +31,6 @@ public class Line {
 	
 
 	public ArrayList<Point> getLinePoint() {
-		//System.out.println(this.linePoint);
 		return new ArrayList<Point>(this.linePoint);
 	}
 	
