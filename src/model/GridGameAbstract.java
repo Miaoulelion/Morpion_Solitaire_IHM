@@ -30,7 +30,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	 * @param widthCross : the width of the cross.
 	 */
 	
-	public void gridInitialization(int x, int y, int widthCross) {
+	private void gridInitialization(int x, int y, int widthCross) {
 		if(widthCross<1) {
 			throw new IllegalArgumentException();
 		}
@@ -111,7 +111,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	 * @return
 	 */
 	
-	public boolean isAligned(int x, int y, int alignmentNumber, int nbPointAlreadyAligned) {
+	protected boolean isAligned(int x, int y, int alignmentNumber, int nbPointAlreadyAligned) {
 		for(Direction d : Direction.values()) {
 			if(this.AlignedPointsByDirection(x, y, d,alignmentNumber,nbPointAlreadyAligned).size()>=alignmentNumber) {//A MODIFIER SI CHOIX
 				return true;
@@ -142,12 +142,6 @@ public abstract class GridGameAbstract implements IGridGame {
 		}
 
 	}
-	
-	
-	public boolean isAligned(int x, int y, int alignmentNumber) {
-		return isAligned(x, y, alignmentNumber,0);
-	}
-	
 	
 	public ArrayList<Point> getGridPoints(){
 		ArrayList<Point> GridPointsCopy= new ArrayList<Point>(this.GridPoints);
@@ -183,10 +177,10 @@ public abstract class GridGameAbstract implements IGridGame {
 	 *
 	 */
 	
-	public Set<Point> getPossiblePoint(){//proposer des modif selon la version
+	public Set<Point> getPossiblePoint(int nbPointForAlign, int nbPointsAlreadyALigned){//proposer des modif selon la version
 		Set<Point> setPossiblePoints=new LinkedHashSet<Point>();
 		for(Point p : this.getNeighborsPoints()) {
-			if(this.isAligned(p.getX(), p.getY(), 5)) {
+			if(this.isAligned(p.getX(), p.getY(), nbPointForAlign,nbPointsAlreadyALigned)) {
 				setPossiblePoints.add(p);
 			}
 		}
@@ -210,7 +204,6 @@ public abstract class GridGameAbstract implements IGridGame {
 	
 		}
 	}
-
 
 	public ArrayList<Point> getPointPlayed() {
 		return PointPlayed;

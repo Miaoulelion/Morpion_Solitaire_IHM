@@ -7,11 +7,6 @@ import utils.Direction;
 import utils.ComparePointByX;
 import utils.ComparePointByY;
 
-/**
- * 
- * @author chat-
- *
- */
 
 public class Line {
 	ArrayList<Point> linePoint;
@@ -20,6 +15,11 @@ public class Line {
 	public Line() {
 		this.linePoint=new ArrayList<Point>();
 	}
+	
+	/**
+	 * The line need to be sorted because we draw the line between the first and the last point.
+	 * @param linePoint
+	 */
 	
 	public Line(ArrayList<Point> linePoint) {
 		Objects.requireNonNull(linePoint);

@@ -17,9 +17,9 @@ import model.IGridGame;
  */
 
 public class GridView extends JPanel{
+	public static final int GRIDLINESWIDTH=40;
 	private final int NUMBEROFGRIDLINES=50;
 	private final int POINTWIDTH=10;
-	private final int GRIDLINESWIDTH=40;
 	private IGridGame gameModel;
 	private LinesView linesView;
 	private boolean hint=false;

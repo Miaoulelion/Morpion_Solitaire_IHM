@@ -33,6 +33,7 @@ public class GameView extends JPanel{
 		this.gridView.addMouseMotionListener((MouseMotionListener) this.gameController);
 		this.add(this.gridView, BorderLayout.SOUTH);
 		this.add(MenuView, BorderLayout.NORTH);
+		this.MenuView.gameName.setText("5D Version");
 		
 	}
 	
@@ -51,15 +52,16 @@ public class GameView extends JPanel{
 
 	public void changeGame() {
 		if(this.gameModel instanceof GridGame5D) {
-			System.out.println("5T");
 			this.gameModel = new GridGame5T();
 			this.gridView.setGameModel(gameModel);
 			this.gameController.setGameModel(gameModel);
+			this.MenuView.gameName.setText("5T Version");
 			this.gridView.repaint();
 		}else {
 			this.gameModel= new GridGame5D();
 			this.gridView.setGameModel(gameModel);
 			this.gameController.setGameModel(gameModel);
+			this.MenuView.gameName.setText("5D Version");
 			this.gridView.repaint();
 
 		}

@@ -12,15 +12,11 @@ import view.GridView;
 import view.MenuView;
 
 public class Controller extends MouseAdapter implements ActionListener {
-	private final int GRIDLINESWIDTH=40;
-	
 	private GridView gridView;
 	private IGridGame gameModel;
 	private MenuView menuView;
 	private GameView gameView;
 
-
-	
 	public Controller(GameView gameView,IGridGame gameModel) {
 		Objects.requireNonNull(gameView);
 		Objects.requireNonNull(gameModel);
@@ -33,8 +29,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 		this.menuView.getRandomSolve().addActionListener(this);
 		this.menuView.getChangeGame().addActionListener(this);
 	}
-	
-
 
 	/**
 	 * @param MouseEvent e (here click)
@@ -45,8 +39,8 @@ public class Controller extends MouseAdapter implements ActionListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		double x=(double)e.getX()/(double)GRIDLINESWIDTH;
-		double y=(double)e.getY()/(double)GRIDLINESWIDTH;
+		double x=(double)e.getX()/(double)GridView.GRIDLINESWIDTH;
+		double y=(double)e.getY()/(double)GridView.GRIDLINESWIDTH;
 		if(!((Math.abs(x-Math.round(x))>0.25&&Math.abs(x-Math.round(x))<0.75)
 				||(Math.abs(y-Math.round(y))>0.25&&Math.abs(y-Math.round(y))<0.75))){
 			gameModel.placePoint((int)Math.round(x), (int)Math.round(y));
@@ -57,25 +51,21 @@ public class Controller extends MouseAdapter implements ActionListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
@@ -83,10 +73,8 @@ public class Controller extends MouseAdapter implements ActionListener {
 		// TODO Auto-generated method stub
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource()==this.menuView.getHint()) {
 			this.activHint();
 		}
@@ -101,8 +89,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 		}
 		
 	}
-	
-	
 	
 	public void startRandomSolve() {
 		this.gameModel.randomSolve();
@@ -119,14 +105,8 @@ public class Controller extends MouseAdapter implements ActionListener {
 		this.gridView.repaint();
 	}
 
-
 	public void setGameModel(IGridGame gameModel) {
 		Objects.requireNonNull(gameModel);
 		this.gameModel = gameModel;
 	}
-	
-
-	
-
-
 }

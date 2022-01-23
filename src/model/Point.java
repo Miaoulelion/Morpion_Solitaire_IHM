@@ -12,13 +12,16 @@ public class Point {
 	private Set<Direction> dirAlignments;
 	
 	public Point(int x, int y) {
+		if(x<0||y<0) {
+			throw new IllegalArgumentException("x and y point coordinates can't be <0.");
+		}
 		this.x=x;
 		this.y=y;
 		this.dirAlignments=new LinkedHashSet<Direction>();
 	}
 	
 	/**
-	 * A point can be aligned in many direction. We need to save all that directions,
+	 * A point can be aligned in many directions. We need to save all that directions,
 	 * to verify if a new point can be added next to this point.
 	 * @param dir
 	 */

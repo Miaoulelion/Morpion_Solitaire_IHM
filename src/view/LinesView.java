@@ -23,6 +23,12 @@ public class LinesView extends JPanel{
 		this.gameModel=gameModel;
 	}
 	
+	/**
+	 * We take all the lines created by the player given by the getLinePoint() gameModel method.
+	 * All the points of this lines are sorted. We trace a line between the first and the last point. 
+	 * @param g
+	 */
+	
 	
 	public void draw(Graphics g) {
 		super.paintComponents(g);
