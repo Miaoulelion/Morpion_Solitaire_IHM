@@ -11,8 +11,9 @@ public class MenuView extends JPanel {//implements ActionListener{
 	JButton hint = new JButton("Can you continue ?");
 	JButton changeGame = new JButton("Switch Game");
 	JButton randomSolve = new JButton("Random");
-	JLabel score = new JLabel();
-	JLabel gameName=new JLabel();
+	JLabel scoreLabel = new JLabel();
+	JLabel gameNameLabel=new JLabel();
+
 
 
 	/**
@@ -23,11 +24,12 @@ public class MenuView extends JPanel {//implements ActionListener{
 	
 	public MenuView() {
 		setBackground(Color.WHITE);
+		add(scoreLabel,BorderLayout.SOUTH);
 		add(restart,BorderLayout.NORTH);
 		add(hint,BorderLayout.SOUTH);
 		add(randomSolve);
 		add(changeGame);
-		add(gameName,BorderLayout.SOUTH);
+		add(gameNameLabel,BorderLayout.EAST);
 	}
 
 	public JButton getRestart() {
@@ -47,10 +49,15 @@ public class MenuView extends JPanel {//implements ActionListener{
 	}
 
 	public JLabel getGameName() {
-		return gameName;
+		return gameNameLabel;
 	}
-	
-	
+
+	public JLabel getScoreLabel() {
+		return scoreLabel;
+	}
+
+
+
 
 
 }

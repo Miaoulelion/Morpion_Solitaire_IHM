@@ -23,6 +23,7 @@ public class GridView extends JPanel{
 	private IGridGame gameModel;
 	private LinesView linesView;
 	private boolean hint=false;
+	private MenuView menuView;
 
 
 	/**
@@ -31,9 +32,10 @@ public class GridView extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	
-	public GridView(IGridGame g) {
+	public GridView(IGridGame g, MenuView menuView) {
 		this.gameModel=g;
 		this.linesView=new LinesView(g);
+		this.menuView=menuView;
 	}
 	
 	
@@ -41,24 +43,19 @@ public class GridView extends JPanel{
 		super.paintComponent(g);
 		g.setColor(Color.BLACK);
 		for(int i=0;i<this.NUMBEROFGRIDLINES;++i) {
-			g.drawLine(i*this.GRIDLINESWIDTH, 0, i*this.GRIDLINESWIDTH,this.getHeight());
-			g.drawLine(0, i*this.GRIDLINESWIDTH,this.getWidth() , i*this.GRIDLINESWIDTH);
+			g.drawLine(i*GRIDLINESWIDTH, 0, i*GRIDLINESWIDTH,this.getHeight());
+			g.drawLine(0, i*GRIDLINESWIDTH,this.getWidth() , i*GRIDLINESWIDTH);
 		}
-	
 		for(model.Point p:this.gameModel.getGridPoints()) {
 			g.fillOval(p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2), 
 					POINTWIDTH, POINTWIDTH);
 		}
-		
 		g.setColor(Color.RED);
 		int cpt=1;
 		for(model.Point p:((GridGameAbstract)this.gameModel).getPointPlayed()) {
 			g.drawString(""+cpt, p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2));
-			++cpt;
-			
+			++cpt;	
 		}
-		
-		
 		this.linesView.draw(g);
 		
 		if(hint) {
@@ -69,7 +66,7 @@ public class GridView extends JPanel{
 			}
 			hint=false;
 		}
-		
+		this.updateScore(this.gameModel.getListOfAlignment().size());
 	}
 
 	public void setHint(boolean hint) {
@@ -82,8 +79,12 @@ public class GridView extends JPanel{
 		this.gameModel = gameModel;
 		this.linesView=new LinesView(gameModel);
 	}
+	
 
 
+	public void updateScore(int score) {
+		this.menuView.getScoreLabel().setText("Score : " + score);
+	}
 
 
 

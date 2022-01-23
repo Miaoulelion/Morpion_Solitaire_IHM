@@ -31,7 +31,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	 */
 	
 	private void gridInitialization(int x, int y, int widthCross) {
-		if(widthCross<1) {
+		if(widthCross<=3) {
 			throw new IllegalArgumentException();
 		}
 		this.GridPoints=new ArrayList<Point>();
