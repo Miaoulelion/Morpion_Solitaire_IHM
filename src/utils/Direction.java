@@ -1,7 +1,7 @@
 package utils;
 
 public enum Direction {
-    VERTICAL(0,-1),HORIZONTAL(1,0),DIAGONALRIGHT(1,1),DIAGONALLEFT(1,-1);
+    VERTICAL(0,-1),HORIZONTAL(-1,0),DIAGONALRIGHT(1,1),DIAGONALLEFT(1,-1);
 
 	private final int dx, dy;
 

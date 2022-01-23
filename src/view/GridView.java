@@ -72,16 +72,6 @@ public class GridView extends JPanel{
 		
 	}
 
-	
-	public int getWIDTH() {
-		return GRIDLINESWIDTH;
-	}
-
-	public int getNUMBEROFLINES() {
-		return NUMBEROFGRIDLINES;
-	}
-
-
 	public void setHint(boolean hint) {
 		this.hint = hint;
 	}
@@ -90,7 +80,12 @@ public class GridView extends JPanel{
 	public void setGameModel(IGridGame gameModel) {
 		Objects.requireNonNull(gameModel);
 		this.gameModel = gameModel;
+		this.linesView=new LinesView(gameModel);
 	}
+
+
+
+
 
 
 	

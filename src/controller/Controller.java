@@ -17,7 +17,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 	private GridView gridView;
 	private IGridGame gameModel;
 	private MenuView menuView;
-	@SuppressWarnings("unused")
 	private GameView gameView;
 
 
@@ -26,6 +25,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 		Objects.requireNonNull(gameView);
 		Objects.requireNonNull(gameModel);
 		this.gridView=gameView.getGridView();
+		this.gameView=gameView;
 		this.gameModel=gameModel;
 		this.menuView=gameView.getMenuView();
 		this.menuView.getHint().addActionListener(this);
@@ -97,7 +97,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 			this.restartGame();
 		}
 		else if(e.getSource()==this.menuView.getChangeGame()) {
-			//this.gameView.changeGame();
+			this.gameView.changeGame();
 		}
 		
 	}

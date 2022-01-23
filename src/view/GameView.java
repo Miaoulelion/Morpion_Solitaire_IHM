@@ -51,7 +51,7 @@ public class GameView extends JPanel{
 
 	public void changeGame() {
 		if(this.gameModel instanceof GridGame5D) {
-			//this.gamev
+			System.out.println("5T");
 			this.gameModel = new GridGame5T();
 			this.gridView.setGameModel(gameModel);
 			this.gameController.setGameModel(gameModel);
