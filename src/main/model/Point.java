@@ -20,7 +20,7 @@ public class Point {
 	 * to verify if a new point can be added next to this point.
 	 * @param dir
 	 */
-	public void addDirection(Direction dir) {
+	protected void addDirection(Direction dir) {
 		Objects.requireNonNull(dir);
 		this.dirAlignments.add(dir);
 	}
@@ -33,7 +33,7 @@ public class Point {
 		return y;
 	}
 
-	public void deleteLastDirection() {
+	protected void deleteLastDirection() {
 		this.dirAlignments.removeLast();
 	}
 	
@@ -69,7 +69,7 @@ public class Point {
 	}
 
 
-	public LinkedList<Direction> getDirAlignments() {
+	protected LinkedList<Direction> getDirAlignments() {
 		return dirAlignments;
 	}
 
