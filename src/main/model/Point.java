@@ -32,6 +32,12 @@ public class Point {
 	public int getY() {
 		return y;
 	}
+	
+	/**
+	 * We the gamer wants to cancel the last point that he have placed,
+	 * we need to delete the last direction added at this point and its alignment.
+	 * This method allows it.
+	 */
 
 	protected void deleteLastDirection() {
 		this.dirAlignments.removeLast();
