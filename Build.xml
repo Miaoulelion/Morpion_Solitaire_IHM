@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<project default="run" name="Create Runnable Jar, compile , generate javadoc ">
+	
+		
+		<target name="clean">
+		    <delete dir="bin"/>
+		    <delete dir="exe"/>
+		    <delete dir="documentation/javadoc"/>
+		</target>
+		
+		<target name="compile" depends="clean">
+		    <mkdir dir="bin"/>
+		    <javac srcdir="src/main" destdir="bin"/>
+		</target>
+		
+		<target name="javadoc" depends="compile" >
+			<mkdir dir="documentation/javadoc"/>
+			<javadoc sourcepath="src/main" destdir="documentation/javadoc">
+				<fileset dir="src/main/"/>
+			</javadoc>
+		</target>
+		
+		<target name="jar" depends="javadoc">
+    		<mkdir dir="exe"/>
+    		<jar destfile="exe/BerthierTalbi.jar" basedir="bin">
+	        	<manifest>
+	            	<attribute name="Main-Class" value="main.view.App"/>
+	        	</manifest>
+    		</jar>
+		</target>
+
+		
+		<target name="run" depends="jar">
+    		<java jar="exe/BerthierTalbi.jar" fork="true"/>
+		</target>
+		
+		
+	</project>
