@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import main.utils.ComparePointByX;
 import main.utils.ComparePointByY;
-import main.utils.Direction;
 
 /**
  * The Line class permit to trace the lines possible when the point is placed.
@@ -31,13 +30,8 @@ public class Line {
 		this.linePoint.sort(new ComparePointByX());
 		this.linePoint.sort(new ComparePointByY());
 	}
-	
-	
 
 	public ArrayList<Point> getLinePoint() {
 		return new ArrayList<Point>(this.linePoint);
 	}
-	
-
-
 }

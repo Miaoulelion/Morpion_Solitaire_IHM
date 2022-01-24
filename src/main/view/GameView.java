@@ -28,7 +28,7 @@ public class GameView extends JPanel{
 		this.gridView.addMouseMotionListener((MouseMotionListener) this.gameController);
 		this.add(this.gridView, BorderLayout.SOUTH);
 		this.add(MenuView, BorderLayout.NORTH);
-		this.MenuView.gameNameLabel.setText("5D Version");	
+		this.MenuView.getGameNameLabel().setText("5D Version");	
 	}
 
 	public void changeGame() {
@@ -36,13 +36,17 @@ public class GameView extends JPanel{
 			this.gameModel = new GridGame5T();
 			this.gridView.setGameModel(gameModel);
 			this.gameController.setGameModel(gameModel);
-			this.MenuView.gameNameLabel.setText("5T Version");
+			this.MenuView.getGameNameLabel().setText("5T Version");
+			this.MenuView.setActualScore(this.gameModel.getListOfAlignment().size());
+			this.MenuView.repaint();
 			this.gridView.repaint();
 		}else {
 			this.gameModel= new GridGame5D();
 			this.gridView.setGameModel(gameModel);
 			this.gameController.setGameModel(gameModel);
-			this.MenuView.gameNameLabel.setText("5D Version");
+			this.MenuView.getGameNameLabel().setText("5D Version");
+			this.MenuView.setActualScore(this.gameModel.getListOfAlignment().size());
+			this.MenuView.repaint();
 			this.gridView.repaint();
 		}
 	
