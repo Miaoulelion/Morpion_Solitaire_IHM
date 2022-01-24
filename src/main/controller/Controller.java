@@ -28,6 +28,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 		this.menuView.getRestart().addActionListener(this);
 		this.menuView.getRandomSolve().addActionListener(this);
 		this.menuView.getChangeGame().addActionListener(this);
+		this.menuView.getCancelPlay().addActionListener(this);
 	}
 
 	/**
@@ -86,6 +87,10 @@ public class Controller extends MouseAdapter implements ActionListener {
 		}
 		else if(e.getSource()==this.menuView.getChangeGame()) {
 			this.gameView.changeGame();
+		}
+		else if(e.getSource()==this.menuView.getCancelPlay()) {
+			this.gameModel.cancelPlay();
+			this.gridView.repaint();
 		}
 		
 	}

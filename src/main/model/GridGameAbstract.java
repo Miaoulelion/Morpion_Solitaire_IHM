@@ -11,15 +11,16 @@ import main.utils.Direction;
 
 public abstract class GridGameAbstract implements IGridGame {
 	private ArrayList<Point>GridPoints;
-	private ArrayList<Line> listOfAlignment;
-	private ArrayList<Point>PointPlayed;
+	private LinkedList<Line> listOfAlignment;
+	private LinkedList<Point>PointPlayed;
 	
 	
 	public GridGameAbstract() {
 		this.GridPoints=new ArrayList<Point>();
-		this.listOfAlignment=new ArrayList<Line>();
-		this.PointPlayed=new ArrayList<Point>();
+		this.listOfAlignment=new LinkedList<Line>();
+		this.PointPlayed=new LinkedList<Point>();
 		gridInitialization(10,3,4);
+		System.out.println(this.GridPoints.size());
 	}
 	
 	
@@ -144,8 +145,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	}
 	
 	public ArrayList<Point> getGridPoints(){
-		ArrayList<Point> GridPointsCopy= new ArrayList<Point>(this.GridPoints);
-		return GridPointsCopy;
+		return new ArrayList<Point>(this.GridPoints);
 	}
 
 
@@ -205,14 +205,27 @@ public abstract class GridGameAbstract implements IGridGame {
 		}
 	}
 
-	public ArrayList<Point> getPointPlayed() {
+	public LinkedList<Point> getPointPlayed() {
 		return PointPlayed;
 	}
 	
 	public void restartGame() {
 		this.gridInitialization(10, 3, 4);
-		this.PointPlayed=new ArrayList<Point>();
-		this.listOfAlignment=new ArrayList<Line>();
+		this.PointPlayed=new LinkedList<Point>();
+		this.listOfAlignment=new LinkedList<Line>();
+	}
+	
+	public void cancelPlay() {
+		if(this.getPointPlayed().size()>0) {
+			Point lasPointPlaced = this.PointPlayed.getLast();
+			Line line = this.listOfAlignment.getLast();
+			for(Point p : line.getLinePoint()) {
+				p.deleteLastDirection();
+			}
+			this.GridPoints.remove(lasPointPlaced);
+			this.PointPlayed.removeLast();
+			this.listOfAlignment.removeLast();
+		}
 	}
 	
 	

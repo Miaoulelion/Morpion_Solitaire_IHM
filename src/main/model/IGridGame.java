@@ -11,4 +11,5 @@ public interface IGridGame {
 	public Set<Point> getPossiblePoint();
 	public void randomSolve();
 	public void restartGame();
+	public void cancelPlay();
 }

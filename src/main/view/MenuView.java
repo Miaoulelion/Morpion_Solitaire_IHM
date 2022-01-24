@@ -11,6 +11,7 @@ public class MenuView extends JPanel {//implements ActionListener{
 	JButton hint = new JButton("Can you continue ?");
 	JButton changeGame = new JButton("Switch Game");
 	JButton randomSolve = new JButton("Random");
+	JButton cancelPlay = new JButton("Cancel");
 	JLabel scoreLabel = new JLabel();
 	JLabel gameNameLabel=new JLabel();
 
@@ -28,6 +29,7 @@ public class MenuView extends JPanel {//implements ActionListener{
 		add(restart,BorderLayout.NORTH);
 		add(hint,BorderLayout.SOUTH);
 		add(randomSolve);
+		add(cancelPlay);
 		add(changeGame);
 		add(gameNameLabel,BorderLayout.EAST);
 	}
@@ -54,6 +56,10 @@ public class MenuView extends JPanel {//implements ActionListener{
 
 	public JLabel getScoreLabel() {
 		return scoreLabel;
+	}
+
+	public JButton getCancelPlay() {
+		return cancelPlay;
 	}
 
 

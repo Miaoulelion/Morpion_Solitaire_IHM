@@ -1,23 +1,18 @@
 package main.model;
 
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Objects;
-import java.util.Set;
-
 import main.utils.Direction;
 
 public class Point {
 	private int x;
 	private int y;
-	private Set<Direction> dirAlignments;
+	private LinkedList<Direction> dirAlignments;
 	
 	public Point(int x, int y) {
-		if(x<0||y<0) {
-			throw new IllegalArgumentException("x and y point coordinates can't be <0.");
-		}
 		this.x=x;
 		this.y=y;
-		this.dirAlignments=new LinkedHashSet<Direction>();
+		this.dirAlignments=new LinkedList<Direction>();
 	}
 	
 	/**
@@ -38,6 +33,10 @@ public class Point {
 		return y;
 	}
 
+	public void deleteLastDirection() {
+		this.dirAlignments.removeLast();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,7 +69,7 @@ public class Point {
 	}
 
 
-	public Set<Direction> getDirAlignments() {
+	public LinkedList<Direction> getDirAlignments() {
 		return dirAlignments;
 	}
 

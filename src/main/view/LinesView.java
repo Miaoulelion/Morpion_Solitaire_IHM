@@ -32,7 +32,7 @@ public class LinesView extends JPanel{
 	
 	public void draw(Graphics g) {
 		super.paintComponents(g);
-		g.setColor(Color.GREEN);
+		g.setColor(Color.RED);
 		ArrayList<Line> Lines = this.gameModel.getListOfAlignment();
 		for(Line line : Lines) {
 			g.drawLine(line.getLinePoint().get(0).getX()*GRIDLINESWIDTH, 

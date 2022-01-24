@@ -19,7 +19,7 @@ import main.model.IGridGame;
 public class GridView extends JPanel{
 	public static final int GRIDLINESWIDTH=40;
 	private final int NUMBEROFGRIDLINES=50;
-	private final int POINTWIDTH=10;
+	private final int POINTWIDTH=15;
 	private IGridGame gameModel;
 	private LinesView linesView;
 	private boolean hint=false;
@@ -48,18 +48,20 @@ public class GridView extends JPanel{
 		}
 		for(main.model.Point p:this.gameModel.getGridPoints()) {
 			g.fillOval(p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2), 
-					POINTWIDTH, POINTWIDTH);
+					POINTWIDTH, POINTWIDTH);			
 		}
-		g.setColor(Color.RED);
+		g.setColor(Color.red);
 		int cpt=1;
 		for(main.model.Point p:((GridGameAbstract)this.gameModel).getPointPlayed()) {
+			//g.drawOval(p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2), POINTWIDTH, POINTWIDTH);
+
 			g.drawString(""+cpt, p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2));
 			++cpt;	
 		}
 		this.linesView.draw(g);
 		
 		if(hint) {
-			g.setColor(Color.red);
+			g.setColor(Color.blue);
 			for(main.model.Point p:this.gameModel.getPossiblePoint()) {
 				g.fillOval(p.getX()*GRIDLINESWIDTH-(POINTWIDTH/2), p.getY()*GRIDLINESWIDTH-(POINTWIDTH/2), 
 						POINTWIDTH, POINTWIDTH);
