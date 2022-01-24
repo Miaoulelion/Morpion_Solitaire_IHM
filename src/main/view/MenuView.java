@@ -16,6 +16,7 @@ public class MenuView extends JPanel {//implements ActionListener{
 	private JButton cancelPlay = new JButton("Cancel");
 	private JLabel scoreLabel = new JLabel();
 	private JLabel gameNameLabel=new JLabel();
+	private JLabel gameOver=new JLabel();
 	private int actualScore;
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +30,7 @@ public class MenuView extends JPanel {//implements ActionListener{
 		add(cancelPlay);
 		add(changeGame);
 		add(gameNameLabel,BorderLayout.EAST);
+		add(gameOver);
 	}
 
 	public JButton getRestart() {
@@ -73,6 +75,10 @@ public class MenuView extends JPanel {//implements ActionListener{
 
 	public JLabel getGameNameLabel() {
 		return gameNameLabel;
+	}
+
+	public JLabel getGameOver() {
+		return gameOver;
 	}
 
 

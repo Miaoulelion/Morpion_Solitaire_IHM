@@ -82,12 +82,19 @@ public class Controller extends MouseAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==this.gameView.getMenuView().getHint()) {
+			if(this.gameModel.getPossiblePoint().size()==0) {
+				this.gameView.getMenuView().getGameOver().setText("  Game over...");
+			}	
 			this.activHint();
 		}
 		else if(e.getSource()==this.gameView.getMenuView().getRandomSolve()) {
+			this.gameView.getMenuView().getGameOver().setText("  Game over...");
 			this.startRandomSolve();
 		}
 		else if(e.getSource()==this.gameView.getMenuView().getRestart()) {
+			if(this.gameModel.getPossiblePoint().size()==0) {
+				this.gameView.getMenuView().getGameOver().setText("");
+			}
 			this.restartGame();
 		}
 		else if(e.getSource()==this.gameView.getMenuView().getChangeGame()) {
@@ -95,12 +102,14 @@ public class Controller extends MouseAdapter implements ActionListener {
 		}
 		else if(e.getSource()==this.gameView.getMenuView().getCancelPlay()) {
 			this.gameModel.cancelPlay();
+			this.gameView.getMenuView().getGameOver().setText("");
 			this.gameView.getMenuView().setActualScore(this.gameModel.getListOfAlignment().size());
 			this.gameView.getMenuView().repaint();
 			this.gameView.getGridView().repaint();
 		}
 		
 	}
+
 	
 	public void startRandomSolve() {
 		this.gameModel.randomSolve();

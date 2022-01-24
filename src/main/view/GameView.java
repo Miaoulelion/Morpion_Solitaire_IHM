@@ -34,6 +34,7 @@ public class GameView extends JPanel{
 			this.gridView.setGameModel(gameModel);
 			this.gameController.setGameModel(gameModel);
 			this.MenuView.getGameNameLabel().setText("5T Version");
+			this.MenuView.getGameOver().setText("");
 			this.MenuView.setActualScore(this.gameModel.getListOfAlignment().size());
 			this.MenuView.repaint();
 			this.gridView.repaint();
@@ -42,6 +43,7 @@ public class GameView extends JPanel{
 			this.gridView.setGameModel(gameModel);
 			this.gameController.setGameModel(gameModel);
 			this.MenuView.getGameNameLabel().setText("5D Version");
+			this.MenuView.getGameOver().setText("");
 			this.MenuView.setActualScore(this.gameModel.getListOfAlignment().size());
 			this.MenuView.repaint();
 			this.gridView.repaint();
