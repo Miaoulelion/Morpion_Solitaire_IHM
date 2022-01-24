@@ -7,10 +7,8 @@ import main.utils.ComparePointByX;
 import main.utils.ComparePointByY;
 
 /**
- * The Line class permit to trace the lines possible when the point is placed.
- *
+ * The Line class allows to trace the possible line when the point is placed.
  */
-
 
 public class Line {
 	ArrayList<Point> linePoint;

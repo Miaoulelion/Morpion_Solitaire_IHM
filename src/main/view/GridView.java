@@ -11,10 +11,9 @@ import main.model.IGridGame;
 import main.model.Line;
 
 /**
- * This class create the grid game (morpion) view. The game is composed by a grid
- * where points are placed by the player. 
- * @author MiaouLeLion
- *
+ * This class create the grid (Morpion solitaire) view. The game is composed by a grid
+ * where points are placed by the player and formed an alignment. 
+
  */
 
 public class GridView extends JPanel{
@@ -23,10 +22,6 @@ public class GridView extends JPanel{
 	private final int POINTWIDTH=15;
 	private IGridGame gameModel;
 	private boolean hint=false;
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	
@@ -34,6 +29,9 @@ public class GridView extends JPanel{
 		this.gameModel=g;
 	}
 	
+	/**
+	 * This method draw the grid, the points and the lines of the game.
+	 */
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -60,7 +58,7 @@ public class GridView extends JPanel{
 					line.getLinePoint().get(line.getLinePoint().size()-1).getX()*GRIDLINESWIDTH, 
 					line.getLinePoint().get(line.getLinePoint().size()-1).getY()*GRIDLINESWIDTH);
 		}
-		
+		//Display all the points that can be played.
 		if(hint) {
 			g.setColor(Color.blue);
 			for(main.model.Point p:this.gameModel.getPossiblePoint()) {
@@ -70,6 +68,13 @@ public class GridView extends JPanel{
 			hint=false;
 		}
 	}
+	
+	/**
+	 * When the user want to have a hint, the controller set a true boolean
+	 * on this setter. The paintComponent is used by the controller to refresh the view.
+	 * All the Points that the gamer can be played are display.
+	 * @param hint
+	 */
 
 	public void setHint(boolean hint) {
 		this.hint = hint;

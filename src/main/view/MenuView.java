@@ -17,12 +17,6 @@ public class MenuView extends JPanel {//implements ActionListener{
 	private JLabel scoreLabel = new JLabel();
 	private JLabel gameNameLabel=new JLabel();
 	private int actualScore;
-
-
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	
@@ -64,7 +58,6 @@ public class MenuView extends JPanel {//implements ActionListener{
 	public JButton getCancelPlay() {
 		return cancelPlay;
 	}
-
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

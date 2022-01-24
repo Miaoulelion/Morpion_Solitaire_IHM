@@ -10,15 +10,12 @@ import main.model.GridGame5D;
 import main.model.GridGame5T;
 import main.model.IGridGame;
 
+
 public class GameView extends JPanel{
 	private IGridGame gameModel= new GridGame5D();
 	private MenuView MenuView=new MenuView();
 	private GridView gridView=new GridView(this.gameModel, this.MenuView);
 	Controller gameController=new Controller(this, this.gameModel);
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public GameView() {

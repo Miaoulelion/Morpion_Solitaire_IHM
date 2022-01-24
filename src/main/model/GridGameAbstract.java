@@ -1,6 +1,7 @@
 package main.model;
 
 import java.util.ArrayList;
+
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -8,6 +9,11 @@ import java.util.Random;
 import java.util.Set;
 
 import main.utils.Direction;
+
+/**
+ * This class represent a model of Morpion Solitaire. 
+ *
+ */
 
 public abstract class GridGameAbstract implements IGridGame {
 	private ArrayList<Point>GridPoints;
@@ -58,14 +64,16 @@ public abstract class GridGameAbstract implements IGridGame {
 	
 	/**
 	 * We want to verify if a Point is aligned for An alignment with a length of 'alignNumber', and 
-	 * for a number of some Points already aligned. We check all the direction and 
-	 * return a LinkedList with the Points aligned.
+	 * for a number of some Points already aligned. We check the direction given in argument.
+	 * If there is a another Point in this direction, if it is already aligned we compare to the
+	 * "nbPointAlreadyAligned" (number of point already aligned authorised, 1 for 5T, 0 for 5D),
+	 * and according to the comparaison we add or not the Point.
 	 * @param x the coordinate of the Point 
 	 * @param y the coordinate of the Point 
 	 * @param dir
 	 * @param alignNumber
 	 * @param nbPointAlreadyAligned
-	 * @return
+	 * @return LinkedList with the Points aligned (maximum "alignNumber", 5 for 5T and 5 for 5D)
 	 */
 	
 	private LinkedList<Point> AlignedPointsByDirection(int x, int y, Direction dir, int alignNumber,int nbPointAlreadyAligned) {
@@ -104,11 +112,11 @@ public abstract class GridGameAbstract implements IGridGame {
 	/**
 	 * Check if an alignment of 'alignmentNumber' length with a certain number of Points already aligned
 	 * exists.
-	 * @param x
-	 * @param y
+	 * @param x coordinate checked
+	 * @param y coordinate checked
 	 * @param alignmentNumber
 	 * @param nbPointAlreadyAligned
-	 * @return
+	 * @return true if the alignment is correct.
 	 */
 	
 	protected boolean isAligned(int x, int y, int alignmentNumber, int nbPointAlreadyAligned) {
@@ -130,14 +138,13 @@ public abstract class GridGameAbstract implements IGridGame {
 		for(Direction d : Direction.values()) {
 			if(this.AlignedPointsByDirection(x, y, d,alignmentNumber,nbPointAlreadyAligned).size()>=alignmentNumber) {
 				LinkedList<Point> alignment=this.AlignedPointsByDirection(x, y, d,alignmentNumber,nbPointAlreadyAligned);
-				this.listOfAlignment.add(new Line(new ArrayList<Point>(alignment)));//on ajoute l'alignement pour le tracer plus tard
+				this.listOfAlignment.add(new Line(new ArrayList<Point>(alignment)));
 				for(Point p: alignment) {
 					p.addDirection(d);
 				}
 				this.GridPoints.add(alignment.getFirst());
 				this.PointPlayed.add(alignment.getFirst());
-				break;//sinon il continue de sortir les autres alignements, bien si on veut
-				//faire bien les choses !
+				break;//can find all the alignment possible for this point.
 			}
 		}
 
@@ -153,8 +160,10 @@ public abstract class GridGameAbstract implements IGridGame {
 	}
 	
 	/**
-	 * 
-	 * @return Get all the neighbors points of the grid points.
+	 * We look around the points already present in the grid if Points exist. 
+	 * If not, it is a potential future neighbor that could allow an alignment. 
+	 * Since two points can have the same neighbor, we use a set to avoid redundancy.
+	 * @return Get all the potential future neighbors points of the grid points.
 	 */
 
 
@@ -172,7 +181,10 @@ public abstract class GridGameAbstract implements IGridGame {
 	}
 	
 	/**
-	 * @return All the points that can be played by the gamer thanks to isAligned() method.
+	 * We go through each of the potential neighbors of our points. 
+	 * We look for each of them if they can allow an alignment. 
+	 * If so, they are added to the set.
+	 * @return All the points that can be played by the player thanks to isAligned() method.
 	 *
 	 */
 	
@@ -188,7 +200,7 @@ public abstract class GridGameAbstract implements IGridGame {
 	}
 	
 	/**
-	 * Select randomly a point among the possible point that can be played,
+	 * This method selects randomly a point among the possible point that can be played,
 	 * as long there is an eligible point.
 	 */
 	
