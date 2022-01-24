@@ -20,7 +20,6 @@ public abstract class GridGameAbstract implements IGridGame {
 		this.listOfAlignment=new LinkedList<Line>();
 		this.PointPlayed=new LinkedList<Point>();
 		gridInitialization(10,3,4);
-		System.out.println(this.GridPoints.size());
 	}
 	
 	
@@ -214,6 +213,12 @@ public abstract class GridGameAbstract implements IGridGame {
 		this.PointPlayed=new LinkedList<Point>();
 		this.listOfAlignment=new LinkedList<Line>();
 	}
+	
+	/**
+	 * This method cancel the last Point placed. 
+	 * We need to remove the last Point played, its last alignment, 
+	 * and the direction (alignment direction) of the Points of the last alignments.
+	 */
 	
 	public void cancelPlay() {
 		if(this.getPointPlayed().size()>0) {

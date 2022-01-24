@@ -7,10 +7,14 @@ import main.utils.ComparePointByX;
 import main.utils.ComparePointByY;
 import main.utils.Direction;
 
+/**
+ * The Line class permit to trace the lines possible when the point is placed.
+ *
+ */
+
 
 public class Line {
 	ArrayList<Point> linePoint;
-	Direction dirLine;
 	
 	public Line() {
 		this.linePoint=new ArrayList<Point>();
