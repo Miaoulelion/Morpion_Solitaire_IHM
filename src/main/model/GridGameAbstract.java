@@ -128,7 +128,7 @@ public abstract class GridGameAbstract implements IGridGame {
 		return false;
 	}
 	
-	public void placePoint(int x, int y, int alignmentNumber, int nbPointAlreadyAligned) {
+	protected void placePoint(int x, int y, int alignmentNumber, int nbPointAlreadyAligned) {
 		if(alignmentNumber<1||nbPointAlreadyAligned<0) {
 			throw new IllegalArgumentException();
 		}
@@ -196,8 +196,8 @@ public abstract class GridGameAbstract implements IGridGame {
 			}
 		}
 		
-		return setPossiblePoints;
-	}
+		return new LinkedHashSet<Point>(setPossiblePoints);
+	}//A vérifier
 	
 	/**
 	 * This method selects randomly a point among the possible point that can be played,

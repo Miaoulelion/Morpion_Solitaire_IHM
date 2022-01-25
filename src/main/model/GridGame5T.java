@@ -9,7 +9,7 @@ public class GridGame5T extends GridGameAbstract{
 		
 	}
 	
-	protected boolean isAligned(int x, int y, int alignmentNumber) {
+	public boolean isAligned(int x, int y, int alignmentNumber) {
 		return super.isAligned(x, y, alignmentNumber, 1);
 	}
 	
