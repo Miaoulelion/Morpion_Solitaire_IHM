@@ -128,6 +128,16 @@ public abstract class GridGameAbstract implements IGridGame {
 		return false;
 	}
 	
+	/**
+	 * This method allows to place a point in the grid thanks to the x and y coordinates given in argument. 
+	 * We use the isAligned() method to know if the point is really aligned with others points, and the method add it to the grid.
+	 * If the point is not aligned or if the point is already contained in the grid, the method do nothing.
+	 * @param x
+	 * @param y
+	 * @param alignmentNumber
+	 * @param nbPointAlreadyAligned
+	 */
+	
 	protected void placePoint(int x, int y, int alignmentNumber, int nbPointAlreadyAligned) {
 		if(alignmentNumber<1||nbPointAlreadyAligned<0) {
 			throw new IllegalArgumentException();

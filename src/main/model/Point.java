@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Objects;
 import main.utils.Direction;
 
+
 public class Point {
 	private int x;
 	private int y;
@@ -53,6 +54,11 @@ public class Point {
 	}
 
 
+	/**
+	 * This equals() method permit to know if the Point exist in the Grid.
+	 * A point is defined by the x and y attribute.
+	 */
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
